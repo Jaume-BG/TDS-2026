@@ -300,3 +300,114 @@
 - **Dado** que el sistema solicita confirmación para eliminar un gasto,
   - **cuando** el usuario cancela la operación mediante la línea de comandos,
     - **entonces** el gasto permanece registrado sin modificaciones.
+
+## HU Visualización de gastos en lista o tabla
+
+**Como** usuario,  
+**quiero** consultar mis gastos registrados en una tabla o lista estructurada,  
+**para** tener una visión detallada, ordenada y precisa de cada transacción individual.
+
+### Criterios de aceptación
+
+- **Dado** que tengo gastos registrados en el sistema,
+  - **cuando** accedo a la vista de lista/tabla,
+    - **entonces** el sistema debe mostrar al menos fecha, concepto, categoría e importe de cada gasto.
+- **Dado** que estoy visualizando la lista de gastos,
+  - **cuando** interactúo con los encabezados de las columnas (ej. fecha o importe),
+    - **entonces** la información debe reordenarse de forma ascendente o descendente según la columna seleccionada.
+
+## HU Visualización de distribución en gráfico circular
+
+**Como** usuario,  
+**quiero** ver la distribución de mis gastos agrupados por categorías en un gráfico circular,  
+**para** identificar de un vistazo qué proporción del gasto total representa cada categoría.
+
+### Criterios de aceptación
+
+- **Dado** que existen gastos asociados a diferentes categorías,
+  - **cuando** accedo a la vista analítica o gráfica,
+    - **entonces** el sistema debe mostrar un gráfico circular donde cada sector represente el porcentaje del gasto total acumulado en esa categoría.
+- **Dado** que se genera el gráfico circular,
+  - **cuando** observo los sectores,
+    - **entonces** debe mostrarse una leyenda clara o etiquetas con el nombre de la categoría y el importe o porcentaje correspondiente.
+
+## HU Visualización de total por categoría en diagrama de barras
+
+**Como** usuario,  
+**quiero** visualizar el total gastado por cada categoría en un diagrama de barras,  
+**para** comparar visualmente las magnitudes absolutas de gasto entre las distintas categorías.
+
+### Criterios de aceptación
+
+- **Dado** un conjunto de gastos registrados,
+  - **cuando** selecciono la vista de gráfico de barras,
+    - **entonces** el sistema debe mostrar un eje con las categorías y otro con la escala monetaria, reflejando una barra por categoría proporcional a su total acumulado.
+- **Dado** que se modifica, añade o elimina un gasto,
+  - **cuando** se consulta el gráfico de barras,
+    - **entonces** las alturas de las barras deben recalcularse automáticamente con los valores actualizados.
+
+## HU Visualización temporal en calendario
+
+**Como** usuario,  
+**quiero** ver mis gastos distribuidos temporalmente en un calendario interactivo con vista de día completo,  
+**para** entender la cronología de mis consumos diarios y localizar picos de gasto en fechas concretas.
+
+### Criterios de aceptación
+
+- **Dado** que tengo gastos con fechas registradas,
+  - **cuando** selecciono la vista de calendario,
+    - **entonces** cada gasto debe posicionarse como una entrada en el día correspondiente dentro de la vista diaria o semanal.
+- **Dado** que estoy navegando en la vista de calendario,
+  - **cuando** visualizo un día en modo Full Day o selecciono una entrada de gasto,
+    - **entonces** debo poder consultar el importe y el concepto exacto asignado a esa fecha sin abandonar el calendario.
+
+## HU Importación de gastos desde fichero bancario
+
+**Como** usuario,  
+**quiero** importar un fichero de texto plano con los movimientos de mi banco,  
+**para** registrar automáticamente mis gastos sin tener que introducirlos manualmente uno a uno.
+
+### Criterios de aceptación
+
+- **Dado** que tengo un fichero de texto plano válido con el formato de la plataforma bancaria de ejemplo,
+  - **cuando** lo selecciono e inicio la importación en la aplicación,
+    - **entonces** el sistema procesa todas las líneas válidas, incorpora los gastos a mi registro y muestra un mensaje indicando el número total de gastos importados.
+- **Dado** que selecciono un fichero que contiene líneas con formato incorrecto, datos corruptos o valores numéricos no válidos,
+  - **cuando** se ejecuta la importación,
+    - **entonces** el sistema notifica el error indicando la fila o causa del fallo, y no añade datos inconsistentes a la aplicación.
+- **Dado** un fichero que contiene transacciones que ya existen previamente en el sistema (misma fecha, concepto e importe),
+  - **cuando** se procesa la importación,
+    - **entonces** el sistema omite dichos registros duplicados (o avisa al usuario antes de sobrescribirlos).
+
+## HU Selección de formato de fichero para importación
+
+**Como** usuario,  
+**quiero** poder seleccionar el tipo o formato del fichero que voy a importar,  
+**para** cargar extractos de gastos procedentes de distintas entidades o plataformas con diferentes estructuras de texto plano.
+
+### Criterios de aceptación
+
+- **Dado** que accedo a la opción de importación externa,
+  - **cuando** voy a cargar un fichero,
+    - **entonces** la interfaz me permite elegir explícitamente el formato o perfil correspondiente (por ejemplo, «Extracto Banco X», «CSV estándar», etc.) antes de procesar el archivo.
+- **Dado** que elijo un perfil de formato concreto pero cargo un archivo con una estructura incompatible o extensión no admitida,
+  - **cuando** el sistema intenta parsear el contenido,
+    - **entonces** aborta el proceso de importación y muestra un mensaje de aviso claro informando de que la estructura no coincide con el formato seleccionado.
+- **Dado** que el sistema procesa la lectura mediante una abstracción,
+  - **cuando** se requiera añadir un nuevo formato en el futuro,
+    - **entonces** la integración se realiza añadiendo un nuevo parser sin necesidad de reescribir la lógica de guardado ni la interfaz gráfica principal.
+
+## HU Selección de cuenta
+
+**Como** usuario,  
+**quiero** poder elegir la cuenta a la que quiero entrar,  
+**para** poder diferenciar mi cuenta personal y mis cuentas compartidas.
+
+### Criterios de aceptación
+
+- **Dado** que el usuario dispone de varias cuentas (personal y compartidas),
+  - **cuando** accede a la opción de selección o cambio de cuenta,
+    - **entonces** el sistema muestra las cuentas disponibles para elegir.
+- **Dado** que se muestran las cuentas disponibles,
+  - **cuando** el usuario selecciona una cuenta,
+    - **entonces** el sistema carga el contexto, gastos y datos correspondientes a esa cuenta.
