@@ -1,4 +1,4 @@
-package um.tds;
+package um.tds.aplicacion;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

@@ -1,0 +1,26 @@
+!SESSION 2026-11-13 10:06:19.244 -----------------------------------------------
+eclipse.buildId=4.41.0.20260903-0719
+java.version=25.0.4.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=es_ES
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY ch.qos.logback.classic 1 0 2026-11-13 10:06:26.197
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2026-11-13 10:08:14.166
+!MESSAGE Logback config file: /home/jaume/Escritorio/Universidad/Tercero/Primer Cuatrimestre/TDS/Proyecto/tds/.metadata/.plugins/org.eclipse.m2e.logback/logback.2.7.201.20260831-2044.xml
+!SESSION 2026-11-13 10:10:12.073 -----------------------------------------------
+eclipse.buildId=4.41.0.20260903-0719
+java.version=25.0.4.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=es_ES
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.java.product -data /home/jaume/Escritorio/Universidad/Tercero/Primer Cuatrimestre/TDS/Proyecto/tds
+
+!ENTRY ch.qos.logback.classic 1 0 2026-11-13 10:10:13.625
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2026-11-13 10:10:14.886
+!MESSAGE Logback config file: /home/jaume/Escritorio/Universidad/Tercero/Primer Cuatrimestre/TDS/Proyecto/tds/.metadata/.plugins/org.eclipse.m2e.logback/logback.2.7.201.20260831-2044.xml
