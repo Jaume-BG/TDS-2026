@@ -1,26 +1,25 @@
 package um.tds.modelo;
 
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Cuenta {
 	
 	//ATRIBUTOS
-	private long id;
 	private String nombre;
+	
+	private HashMap<Long, Gasto> lista_gastos;
 	
 	
 	//CONSTRUCTOR
-	public Cuenta(long id, String nombre) {
+	public Cuenta(String nombre) {
 		this.nombre = nombre;
-		id = Integer.toUnsignedLong(nombre.hashCode());
+		lista_gastos = new HashMap<>();
 	}
 
 
 	//GETTERS
-	public long getId() {
-		return id;
-	}
-
 	public String getNombre() {
 		return nombre;
 	}
@@ -28,15 +27,25 @@ public class Cuenta {
 	
 	//FUNCIONALIDAD
 	public int registrarGasto(Gasto gasto) {
-		return 0;
+		//Caso de exito
+		if(lista_gastos.put(gasto.getId(), gasto) != null) {
+			return 0;
+		}
+		
+		//Caso de fallo
+		return 1;
 	}
 	
 	public int eliminarGasto(long id) {
-		return 0;
+		//Caso de exito
+		if(lista_gastos.remove(id) != null) return 0;
+		
+		//Caso de fallo
+		return 1;
 	}
 	
-	public ArrayList obtenerGastos() {
-		return new ArrayList();
+	public Map <Long, Gasto> obtenerGastos() {
+		return Collections.unmodifiableMap(lista_gastos);
 	}
 	
 	
