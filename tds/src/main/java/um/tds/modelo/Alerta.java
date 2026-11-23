@@ -3,6 +3,7 @@ package um.tds.modelo;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Alerta {
 	private int id;
@@ -26,6 +27,7 @@ public class Alerta {
 		this.historial = new ArrayList<>();
 	}
 	
+	//GETTERS Y SETTERS
 	public int getId() {
 		return id;
 	}
@@ -66,47 +68,60 @@ public class Alerta {
 		this.historial = historial;
 	}
 
-	public boolean evaluar(List<Gasto> gastos) {
-		if (gastos == null || gastos.isEmpty()) {
-			return false;
-		}
-
-		LocalDate hoy = LocalDate.now();
-		LocalDate inicio = periodicidad.inicioPeriodo(hoy);
-		LocalDate fin = periodicidad.finPeriodo(hoy);
-
-		int importeAcumulado = gastos.stream().filter(this::cumpleAmbitoCategoria)
-				.filter(g -> estaDentroDelPeriodo(g.getFecha(), inicio, fin)).mapToInt(Gasto::getImporte).m.sum();
-
-		boolean superado = importeAcumulado > this.limite;
-
-		if (superado) {
-			generarNotificacion(importeAcumulado);
-		}
-
-		return superado;
-	}
-
+	
+	//FILTROS
 	private boolean cumpleAmbitoCategoria(Gasto gasto) {
 		if (this.categoria == null) {
 			return true;
 		}
 		return this.categoria.equals(gasto.getCategoria());
 	}
-
+	
+	
 	private boolean estaDentroDelPeriodo(LocalDate fechaGasto, LocalDate inicio, LocalDate fin) {
 		if (fechaGasto == null) {
 			return false;
 		}
 		return !fechaGasto.isBefore(inicio) && !fechaGasto.isAfter(fin);
 	}
+	
+	
+	//FUNCIONALIDAD
+	public int evaluar(List<Gasto> gastos) { //Posible cambio de lista de notificaciones a que esto devuelva una notificacion y hacer la lista de notificaciones en cuenta
+		if (gastos == null || gastos.isEmpty()) {
+			return 1;
+		}
 
-	private void generarNotificacion(int importeAcumulado) {
+		LocalDate hoy = LocalDate.now();
+		LocalDate inicio = periodicidad.inicioPeriodo(hoy);
+		LocalDate fin = periodicidad.finPeriodo(hoy);
+
+		int importeAcumulado = gastos.stream()
+				.filter(this::cumpleAmbitoCategoria)
+				.filter(g -> estaDentroDelPeriodo(g.getFecha(), inicio, fin))
+				.mapToInt(Gasto::getImporte)
+				.sum();
+
+		boolean superado = importeAcumulado > this.limite;
+
+		if (superado) {
+			if(generarNotificacion(importeAcumulado) != null) return 0;
+		}
+
+		//Caso de fallo no completada la transaccion
+		return 2;
+	}
+	
+	
+	private Notificacion generarNotificacion(int importeAcumulado) {
 		String nombreCategoria = (categoria != null) ? categoria.getNombre() : "General";
 		String mensaje = String.format("Alerta superada [%s]: gasto acumulado de %s € frente a un límite de %s €.",
 				nombreCategoria, importeAcumulado, this.limite);
+		
 		Notificacion notificacion = new Notificacion(LocalDateTime.now(), mensaje, importeAcumulado, this.limite);
+		
 		this.historial.add(notificacion);
+		return notificacion;
 	}
 
 }

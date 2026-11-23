@@ -5,14 +5,14 @@ import java.time.LocalDate;
 public class Gasto {
 
 	//ATRIBUTOS
-	private long id;
+	private int id;
 	private int importe;
 	private LocalDate fecha;
 	private String concepto;
-	private String categoria;
+	private Categoria categoria;
 
 	//CONSTRUCTOR
-	public Gasto(long id, int importe, LocalDate fecha, String concepto, String categoria) {
+	public Gasto(int id, int importe, LocalDate fecha, String concepto, Categoria categoria) {
 		this.id = id;
 		this.importe = importe;
 		this.fecha = fecha;
@@ -21,7 +21,7 @@ public class Gasto {
 	}
 
 	//GETTERS
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -37,7 +37,7 @@ public class Gasto {
 		return concepto;
 	}
 
-	public String getCategoria() {
+	public Categoria getCategoria() {
 		return categoria;
 	}
 

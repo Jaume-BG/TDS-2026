@@ -1,5 +1,6 @@
 package um.tds.modelo;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,14 +9,15 @@ public class Cuenta {
 	
 	//ATRIBUTOS
 	private String nombre;
-	
-	private HashMap<Long, Gasto> lista_gastos;
+	private HashMap<Integer, Gasto> lista_gastos;
+	private ArrayList<Alerta> lista_alertas;
 	
 	
 	//CONSTRUCTOR
 	public Cuenta(String nombre) {
 		this.nombre = nombre;
 		lista_gastos = new HashMap<>();
+		lista_alertas = new ArrayList<>();
 	}
 
 
@@ -44,7 +46,7 @@ public class Cuenta {
 		return 1;
 	}
 	
-	public Map <Long, Gasto> obtenerGastos() {
+	public Map <Integer, Gasto> obtenerGastos() {
 		return Collections.unmodifiableMap(lista_gastos);
 	}
 	
