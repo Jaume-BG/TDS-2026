@@ -1,19 +1,18 @@
 package um.tds.modelo;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Gasto {
 
 	//ATRIBUTOS
 	private long id;
-	private BigDecimal importe;
+	private int importe;
 	private LocalDate fecha;
 	private String concepto;
 	private String categoria;
 
 	//CONSTRUCTOR
-	public Gasto(long id, BigDecimal importe, LocalDate fecha, String concepto, String categoria) {
+	public Gasto(long id, int importe, LocalDate fecha, String concepto, String categoria) {
 		this.id = id;
 		this.importe = importe;
 		this.fecha = fecha;
@@ -26,7 +25,7 @@ public class Gasto {
 		return id;
 	}
 
-	public BigDecimal getImporte() {
+	public int getImporte() {
 		return importe;
 	}
 
